@@ -5,6 +5,7 @@ import json
 import shutil
 import configparser
 import urllib
+import urllib.request
 from collections import OrderedDict
 from selenium.common.exceptions import StaleElementReferenceException
 import logging
