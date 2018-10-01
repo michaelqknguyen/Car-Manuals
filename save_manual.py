@@ -4,11 +4,12 @@ from selenium import webdriver
 import json
 import shutil
 import configparser
+import urllib
 from collections import OrderedDict
 from selenium.common.exceptions import StaleElementReferenceException
 import logging
+import traceback
 
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 logger = logging.Logger('SaveManual')
 
 parser = configparser.ConfigParser()
@@ -335,15 +336,16 @@ while True:
             time.sleep(5)
             driver.get(REQUEST_URL)
             time.sleep(5)
+            consecutive_failures = 0
             html_list2 = driver.find_element_by_id('dvRepairTree')
             items2 = html_list2.find_elements_by_tag_name('li')
             print('Going in')
             keep_continue = print_or_parse_v2(driver, items2, i, download_path, 1, 
                                               keep_continue, first_level=True, pass_chapters=last_good_items)
-        consecutive_failures = 0
 
     except:
     # fail if 10+ consecutive failures (driver probably broken and need to log in again)
+        traceback.print_exc()
         consecutive_failures += 1
         driver.close()
         if consecutive_failures >= 10:
