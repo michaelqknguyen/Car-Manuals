@@ -1,7 +1,7 @@
 # Car-Manuals
 
 ## Pre-Requisites
-* [Python3](https://realpython.com/installing-python/)
+* [Python3](https://realpython.com/installing-python/) - Python for specific OS you are on
 * [ChromeDriver](http://chromedriver.chromium.org/downloads) - install the correct one for the OS you are on. This lets the code simulate a chrome browser so we can open the links and save the html pages
 * [Python Packages](requirements.txt) - See section below to install these requirements
 
