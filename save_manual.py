@@ -297,7 +297,8 @@ def get_last_found_item(download_path):
     
     # otherwise go into next
     next_dir = os.path.join(download_path, '{:03}_{}'.format(last_index, ordered_items[last_index]))
-    last_item_path.extend(get_last_found_item(next_dir))
+    extra_items, random_index = get_last_found_item(next_dir)
+    last_item_path.extend(extra_items)
     return last_item_path, last_index
 
 
@@ -330,6 +331,9 @@ while True:
             keep_continue = False
         else:
             keep_continue = True
+
+        print('Skipping all these chapters'.format(str(last_good_items)))
+        print('Starting with chapter num: {}'.format(start_from))
 
         for i in range(start_from,len(items)):
             time.sleep(5)
