@@ -291,7 +291,8 @@ def get_last_found_item(download_path):
     if not ordered_items:
         return [], 0
     last_index = next(reversed(ordered_items))
-    last_item_path.append(ordered_items[last_index].split('.')[0])
+    last_item_path.append(
+    	'.'.join(ordered_items[last_index].split('.')[-1])) ## get rid of .html extension
     if ordered_items[last_index].endswith('.html'):
         return last_item_path, last_index
     
@@ -333,6 +334,7 @@ while True:
             keep_continue = True
 
         print('Skipping all these chapters'.format(str(last_good_items)))
+        print(last_good_items)
         print('Starting with chapter num: {}'.format(start_from))
 
         for i in range(start_from,len(items)):
