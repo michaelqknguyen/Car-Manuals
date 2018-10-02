@@ -289,16 +289,16 @@ def get_last_found_item(download_path):
 
     # if last item ends in .html, then we hit the end, else go in the folder more
     if not ordered_items:
-        return []
+        return [], 0
     last_index = next(reversed(ordered_items))
     last_item_path.append(ordered_items[last_index].split('.')[0])
     if ordered_items[last_index].endswith('.html'):
-        return last_item_path
+        return last_item_path, last_index
     
     # otherwise go into next
     next_dir = os.path.join(download_path, '{:03}_{}'.format(last_index, ordered_items[last_index]))
     last_item_path.extend(get_last_found_item(next_dir))
-    return last_item_path
+    return last_item_path, last_index
 
 
 consecutive_failures = 0
@@ -325,14 +325,12 @@ while True:
         items = html_list.find_elements_by_tag_name('li')
         items_set = item_set_by_id(driver, 'dvRepairTree','li')
 
-        last_good_items = get_last_found_item(download_path)
+        last_good_items, start_from = get_last_found_item(download_path)
         if last_good_items:
             keep_continue = False
         else:
             keep_continue = True
 
-
-        start_from = 0
         for i in range(start_from,len(items)):
             time.sleep(5)
             driver.get(REQUEST_URL)
