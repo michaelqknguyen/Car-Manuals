@@ -345,12 +345,13 @@ while True:
             print('Going in')
             keep_continue = print_or_parse_v2(driver, items2, i, download_path, 1, 
                                               keep_continue, first_level=True, pass_chapters=last_good_items)
+        break
 
     except:
     # fail if 10+ consecutive failures (driver probably broken and need to log in again)
+        driver.close()
         traceback.print_exc()
         consecutive_failures += 1
-        driver.close()
         if consecutive_failures >= 10:
             break
 
