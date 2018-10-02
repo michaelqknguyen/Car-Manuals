@@ -292,7 +292,7 @@ def get_last_found_item(download_path):
         return [], 0
     last_index = next(reversed(ordered_items))
     last_item_path.append(
-    	'.'.join(ordered_items[last_index].split('.')[:-1])) ## get rid of .html extension
+    	'.'.join(ordered_items[last_index].replace('.html',''))) ## get rid of .html extension
     if ordered_items[last_index].endswith('.html'):
         return last_item_path, last_index
     
