@@ -282,6 +282,8 @@ def get_last_found_item(download_path):
             continue
         if not '_' in item:
             continue
+        if item.endswith(('.pdf','gif')):
+        	continue
         item_dict.update({
                 int(item.split('_', 1)[0]): item.split('_', 1)[1]
             })
